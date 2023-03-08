@@ -17,8 +17,7 @@ import FormData from 'form-data';
 
 type Url = string;
 type FileName = string;
-type InputValue = string | number | Date;
-type OutputValue = any;
+type IOValue = any;
 type EnvValue = string;
 type DocMetaFields = {
     fileName: string;
@@ -33,12 +32,12 @@ type ESignedDocument = {
     name: string;
     file: string;
 };
-interface ESignedDocuments {
+type ESignedDocuments = {
     page: string;
     status: string;
     original: string;
     signedDocuments: ESignedDocument[];
-}
+};
 type LookupVariable = {
     name: string;
     value: any;
@@ -55,15 +54,15 @@ type LookupPaginatedResponse = {
     totalCount: number;
 };
 declare const api: {
-    getVariable: (name: string) => InputValue;
+    getVariable: (name: string) => IOValue;
     getDocumentMetadata: (name: string) => DocMetadata;
     getFileURL: (name: FileName) => Url[];
     getPrivateFileURL: (name: FileName) => Url[];
     getESignInfo: () => ESignedDocuments[];
-    overwriteVariable: (name: string, value: InputValue) => void;
+    overwriteVariable: (name: string, value: IOValue) => void;
     env: (name: string) => EnvValue | undefined;
     lookupVariables: (appCode: string, variables: string[], targetTeams: string[]) => Promise<LookupPaginatedResponse>;
-    setVariable: (name: string, value: OutputValue) => void;
+    setVariable: (name: string, value: IOValue) => void;
     makeRequest: (config: AxiosRequestConfig<any>) => axios.AxiosPromise<any>;
     knex: typeof knex;
     lodash: _.LoDashStatic;
@@ -81,4 +80,4 @@ declare const api: {
     FormData: typeof FormData;
 };
 
-export { DocMetaFields, DocMetadata, ESignedDocument, ESignedDocuments, EnvValue, FileName, InputValue, LookupPaginatedResponse, LookupResult, LookupVariable, OutputValue, Url, api };
+export { DocMetaFields, DocMetadata, ESignedDocument, ESignedDocuments, EnvValue, FileName, IOValue, LookupPaginatedResponse, LookupResult, LookupVariable, Url, api };
