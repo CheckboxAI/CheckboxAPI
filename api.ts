@@ -16,8 +16,7 @@ import FormData from "form-data";
 
 export type Url = string;
 export type FileName = string;
-export type InputValue = string | number | Date;
-export type OutputValue = any;
+export type IOValue = any;
 export type EnvValue = string;
 
 export type DocMetaFields = {
@@ -37,7 +36,7 @@ export type ESignedDocument = {
 };
 
 
-export interface ESignedDocuments {
+export type ESignedDocuments = {
   page: string;
   status: string;
   original: string;
@@ -63,7 +62,7 @@ export type LookupPaginatedResponse = {
 };
 
 export const api = {
-  getVariable: (name: string): InputValue => { return "" },
+  getVariable: (name: string): IOValue => { return "" },
 
   getDocumentMetadata: (name: string): DocMetadata => {
     return {};
@@ -78,10 +77,10 @@ export const api = {
   },
 
   getESignInfo: (): ESignedDocuments[] => {
-    return ;
+    return [] ;
   },
 
-  overwriteVariable: (name: string, value: InputValue): void => {},
+  overwriteVariable: (name: string, value: IOValue): void => {},
 
   env: (name: string): EnvValue | undefined => {
     return "";
@@ -98,7 +97,7 @@ export const api = {
     };
   },
 
-  setVariable: (name: string, value: OutputValue): void => {},
+  setVariable: (name: string, value: IOValue): void => {},
 
   makeRequest: (config: AxiosRequestConfig<any>) => axios(config),
 
